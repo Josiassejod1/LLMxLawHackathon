@@ -1,5 +1,3 @@
-import { PDFDocument } from "pdf-lib";
-
 export default function Pdf() {
   return (
     <div>
