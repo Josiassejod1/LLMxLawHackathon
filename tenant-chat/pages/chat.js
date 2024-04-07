@@ -1,10 +1,9 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 
 export default function Chat() {
   const [chatWidget, setChatWidget] = useState(null);
-
-  /* the rest of your code */
 
   useEffect(() => {
     const importAndCreateWidget = async () => {
@@ -18,7 +17,7 @@ export default function Chat() {
           placeholder='"Tell Me About My Rights"'
           inputSize="large"
           emptyStateDisplay={"Nothing Loaded Yet"}
-          enableStreaming={true}
+          enableStreaming={false}
           isInitiallyOpen={true}
         />
       );
