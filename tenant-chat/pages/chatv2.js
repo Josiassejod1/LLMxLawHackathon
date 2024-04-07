@@ -4,7 +4,7 @@ import axios from "axios";
 export default function Chatv2() {
   const [inputText, setInputText] = useState("");
   const [messageHistory, setMessageHistory] = useState([]); // [ { message: "Hello", isUser: true }, { message: "Hi", isUser: false }
-
+  function createPdf() {}
   function queryVectara(query) {
     let data = JSON.stringify({
       query: [
