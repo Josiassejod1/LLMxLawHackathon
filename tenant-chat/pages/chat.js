@@ -9,17 +9,17 @@ export default function Chat() {
   useEffect(() => {
     const importAndCreateWidget = async () => {
       const { ReactChatbot } = await import("@vectara/react-chatbot");
-
       setChatWidget(
         <ReactChatbot
-          customerId={process.env.CUSTOMER_ID}
-          corpusId={[process.env.CORPUS_ID]}
-          apiKey={process.env.API_KEY}
-          title="My Chatbot"
-          placeholder="Chat with your AI assistant"
+          customerId="2531807925"
+          corpusIds={["3"]}
+          apiKey="zwt_luhStWcjxv0h6RqcgR0ulvzDwLlRg2xWqaBooQ"
+          title="Vectara Docs Chatbot"
+          placeholder='"Tell Me About My Rights"'
           inputSize="large"
-          isInitiallyOpen={true}
+          emptyStateDisplay={"Nothing Loaded Yet"}
           enableStreaming={true}
+          isInitiallyOpen={true}
         />
       );
     };
