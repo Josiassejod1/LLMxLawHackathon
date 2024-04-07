@@ -11,6 +11,9 @@ export default function Home() {
       <li>
         <Link href="/pdf">About Us</Link>
       </li>
+      <li>
+        <Link href="/chat">Chat</Link>
+      </li>
     </ul>
   );
 }
