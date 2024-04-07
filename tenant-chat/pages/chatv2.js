@@ -1,10 +1,30 @@
 import React, { useState } from "react";
 import axios from "axios";
+import download from "downloadjs";
+import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
 export default function Chatv2() {
   const [inputText, setInputText] = useState("");
+  const [response, lastReponse] = useState("");
   const [messageHistory, setMessageHistory] = useState([]); // [ { message: "Hello", isUser: true }, { message: "Hi", isUser: false }
-  function createPdf() {}
+  async function createPdf() {
+    const pdfDoc = await PDFDocument.create();
+    const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+
+    const page = pdfDoc.addPage();
+    const { width, height } = page.getSize();
+    const fontSize = 30;
+    page.drawText(response, {
+      x: 50,
+      y: height - 4 * fontSize,
+      size: fontSize,
+      font: timesRomanFont,
+      color: rgb(0, 0.53, 0.71),
+    });
+
+    const pdfBytes = await pdfDoc.save();
+    download(pdfBytes, "pdf-lib_creation_example.pdf", "application/pdf");
+  }
   function queryVectara(query) {
     let data = JSON.stringify({
       query: [
@@ -50,6 +70,7 @@ export default function Chatv2() {
         console.log(
           JSON.stringify(response.data.responseSet[0].response[0].text)
         );
+        lastReponse(response.data.responseSet[0].response[0].text);
         setMessageHistory((prevHistory) => [
           ...prevHistory,
           {
@@ -91,11 +112,15 @@ export default function Chatv2() {
               response: inputText,
             },
           ]);
+          if (inputText === "create pdf") {
+            createPdf();
+          }
           setInputText("");
         }}
       >
         Send
       </button>
+      {/* <iframe id="pdf" style={{ width: "100%", height: "500px" }} /> */}
     </div>
   );
 }

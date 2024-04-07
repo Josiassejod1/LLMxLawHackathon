@@ -8,8 +8,10 @@
   "dependencies": {
     "@vectara/react-chatbot": "^1.0.0",
     "axios": "^1.6.8",
+    "downloadjs": "^1.4.7",
     "markdown-to-jsx": "^7.4.6",
     "next": "latest",
+    "pdf-lib": "^1.17.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
