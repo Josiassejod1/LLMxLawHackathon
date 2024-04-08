@@ -12,7 +12,7 @@ export default function Chat() {
         <ReactChatbot
           customerId={process.env.REACT_APP_CUSTOMER_ID}
           corpusIds={[process.env.REACT_APP_CORPUS_ID]}
-          apiKey={process.env.REACT_API_KEY}
+          apiKey={process.env.REACT_APP_API_KEY}
           title="Vectara Docs Chatbot"
           placeholder='"Tell Me About My Rights"'
           inputSize="large"

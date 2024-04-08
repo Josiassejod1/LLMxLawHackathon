@@ -118,7 +118,7 @@ export default function Chatv2() {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "x-api-key": process.env.REACT_API_KEY,
+        "x-api-key": process.env.REACT_APP_API_KEY,
       },
       data: data,
     };
