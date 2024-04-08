@@ -9,6 +9,7 @@
     "@vectara/react-chatbot": "^1.0.0",
     "axios": "^1.6.8",
     "downloadjs": "^1.4.7",
+    "groq-sdk": "^0.3.2",
     "markdown-to-jsx": "^7.4.6",
     "next": "latest",
     "pdf-lib": "^1.17.1",

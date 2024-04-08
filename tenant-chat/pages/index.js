@@ -1,5 +1,4 @@
 import Link from "next/link";
-import "dotenv/config";
 
 import * as React from "react";
 
@@ -14,6 +13,9 @@ export default function Home() {
       </li>
       <li>
         <Link href="/chat">Chat</Link>
+      </li>
+      <li>
+        <Link href="/chatv2">Chatv2</Link>
       </li>
     </ul>
   );
