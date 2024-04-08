@@ -7,7 +7,7 @@ import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
 export default function Chatv2() {
   const [inputText, setInputText] = useState("");
-  const [response, lastReponse] = useState("");
+  const [response, setResponse] = useState("");
   const [messageHistory, setMessageHistory] = useState([]); // [ { message: "Hello", isUser: true }, { message: "Hi", isUser: false }
   async function createPdf(text) {
     const pdfDoc = await PDFDocument.create();
@@ -34,14 +34,14 @@ export default function Chatv2() {
   async function getGroqChatCompletion() {
     const groq = new Groq({
       dangerouslyAllowBrowser: true,
-      apiKey: "",
+      apiKey: process.env.REACT_APP_GROK,
     });
     let userPrompt = [];
     if (inputText != "create pdf") {
       userPrompt = [
         ...messageHistory,
         {
-          role: "user",
+          role: "assistant",
           content: `${prompt}`,
         },
       ];
@@ -49,8 +49,8 @@ export default function Chatv2() {
       userPrompt = [
         ...messageHistory,
         {
-          role: "user",
-          content: `${prompt}. Generate a pdf that I can share with a landlord and strip out your advice`,
+          role: "assistant",
+          content: `${prompt}. Generate a pdf that I can share with a landlord`,
         },
       ];
     }
@@ -61,7 +61,7 @@ export default function Chatv2() {
         model: "mixtral-8x7b-32768",
       })
       .then((response) => {
-        lastReponse(response.choices[0].message.content);
+        setResponse(response.choices[0].message.content);
         setMessageHistory((prevHistory) => [
           ...prevHistory,
           {
@@ -69,10 +69,11 @@ export default function Chatv2() {
             content: response.choices[0].message.content,
           },
         ]);
+        return response.choices[0].message.content;
       })
-      .then(() => {
+      .then((data) => {
         if (inputText === "create pdf") {
-          createPdf(response);
+          createPdf(data);
         }
         setInputText("");
       })
@@ -117,14 +118,14 @@ export default function Chatv2() {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "x-api-key": "zwt_luhStWcjxv0h6RqcgR0ulvzDwLlRg2xWqaBooQ",
+        "x-api-key": process.env.REACT_API_KEY,
       },
       data: data,
     };
 
     axios(config)
       .then((response) => {
-        lastReponse(response.data.responseSet[0].response[0].text);
+        setResponse(response.data.responseSet[0].response[0].text);
         setMessageHistory((prevHistory) => [
           ...prevHistory,
           {
