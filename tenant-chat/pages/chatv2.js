@@ -7,7 +7,7 @@ import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
 export default function Chatv2() {
   const [inputText, setInputText] = useState("");
-  const [response, setResponse] = useState("");
+  const [response, lastReponse] = useState("");
   const [messageHistory, setMessageHistory] = useState([]); // [ { message: "Hello", isUser: true }, { message: "Hi", isUser: false }
   async function createPdf(text) {
     const pdfDoc = await PDFDocument.create();
@@ -34,7 +34,7 @@ export default function Chatv2() {
   async function getGroqChatCompletion() {
     const groq = new Groq({
       dangerouslyAllowBrowser: true,
-      apiKey: process.env.REACT_APP_GROK,
+      apiKey: "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",
     });
     let userPrompt = [];
     if (inputText != "create pdf") {
@@ -61,7 +61,7 @@ export default function Chatv2() {
         model: "mixtral-8x7b-32768",
       })
       .then((response) => {
-        setResponse(response.choices[0].message.content);
+        lastReponse(response.choices[0].message.content);
         setMessageHistory((prevHistory) => [
           ...prevHistory,
           {
@@ -118,14 +118,14 @@ export default function Chatv2() {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "x-api-key": process.env.REACT_APP_API_KEY,
+        "x-api-key": "zwt_luhStWcjxv0h6RqcgR0ulvzDwLlRg2xWqaBooQ",
       },
       data: data,
     };
 
     axios(config)
       .then((response) => {
-        setResponse(response.data.responseSet[0].response[0].text);
+        lastReponse(response.data.responseSet[0].response[0].text);
         setMessageHistory((prevHistory) => [
           ...prevHistory,
           {
