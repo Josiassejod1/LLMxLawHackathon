@@ -10,9 +10,9 @@ export default function Chat() {
       const { ReactChatbot } = await import("@vectara/react-chatbot");
       setChatWidget(
         <ReactChatbot
-          customerId={process.env.REACT_APP_CUSTOMER_ID}
-          corpusIds={[process.env.REACT_APP_CORPUS_ID]}
-          apiKey={process.env.REACT_APP_API_KEY}
+          customerId="2531807925"
+          corpusIds={["3"]}
+          apiKey="zwt_luhStWcjxv0h6RqcgR0ulvzDwLlRg2xWqaBooQ"
           title="Vectara Docs Chatbot"
           placeholder='"Tell Me About My Rights"'
           inputSize="large"
